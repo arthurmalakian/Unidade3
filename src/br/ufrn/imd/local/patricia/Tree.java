@@ -1,17 +1,38 @@
 package br.ufrn.imd.local.patricia;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 
 public class Tree {
 
     private Node root;
 
+    private void searchPrefix(Node node, String value,ArrayList<String> list){
+        if (node.isLeaf()){
+            list.add(binaryToKey(node.getKey()));
+        }else{
+            searchPrefix(node.getLeft(),value,list);
+            searchPrefix(node.getRight(),value,list);
+        }
+    }
+    public ArrayList<String> searchPrefix(String value){
+        ArrayList<String> returnArray = new ArrayList<String>();
+        if (root == null || value == ""){
+            return returnArray;
+        }
+        String key = keyToBinary(value);
+        Node node = getNode(root,key);
+        if (node.getKey().startsWith(key)){
+            Node insert = getInsertPoint(root,key,key.length());
+            searchPrefix(insert,key,returnArray);
+        }
+        return returnArray;
+    }
     public boolean insert(String value){
         if (value == ""){
             return false;
         }
         String key = keyToBinary(value);
-        System.out.println(key);
         if (root == null){
             root = new Node(key);
             root.setIndex(key.length());
