@@ -3,35 +3,25 @@ package br.ufrn.imd.local.patricia;
 import java.math.BigInteger;
 import java.util.ArrayList;
 
-/**
-    MÉTODOS:
-
-    searchPrefix: Recebe uma sequência de caracteres
-    e procura pelas palavras presentes na árvore que têm essa sequência
-    de caracteres como prefixo.
-
-    search: Recebe uma palavra, transforma ela em uma string de números
-    binários e verifica se existe algum nó com essa key.
-
-    getInsertPoint: Percorre a árvore recursivamente até achar o primeiro
-    nó folha ou um nó de decisão que possua index maior do que o passado
-    como parâmetro do método.
-
-    diffIndex: Recebe duas strings de números binários e acha o index
-    de diferença entre elas.
-
-    getNode: Busca o nó folha mais próximo da key informada como parâmetro.
-
-    keyToBinary: Recebe uma palavra e transforma em uma string de números
-    binários.
-
-    binaryToKey: Recebe uma string de números binários e transforma em uma
-    palavra com nossos caracteres.
-
- */
-
 public class Tree {
-
+    /*
+     MÉTODOS:
+     searchPrefix: Recebe uma sequência de caracteres
+     e procura pelas palavras presentes na árvore que têm essa sequência
+     de caracteres como prefixo.
+     search: Recebe uma palavra, transforma ela em uma string de números
+     binários e verifica se existe algum nó com essa key.
+     getInsertPoint: Percorre a árvore recursivamente até achar o primeiro
+     nó folha ou um nó de decisão que possua index maior do que o passado
+     como parâmetro do método.
+     diffIndex: Recebe duas strings de números binários e acha o index
+     de diferença entre elas.
+     getNode: Busca o nó folha mais próximo da key informada como parâmetro.
+     keyToBinary: Recebe uma palavra e transforma em uma string de números
+     binários.
+     binaryToKey: Recebe uma string de números binários e transforma em uma
+     palavra com nossos caracteres.
+     */
     private Node root;
 
     private void searchPrefix(Node node, String value,ArrayList<String> list){
@@ -111,6 +101,7 @@ public class Tree {
         }
         return n-1;
     }
+
     private Node getNode(Node node, String key){
         if (node.isLeaf()){
             return node;
@@ -141,8 +132,7 @@ public class Tree {
         for (int i = 0; i < indent; i++){
             prefix += "\t";
         }
-        return toString(node.getRight(),indent+1 ) + prefix + (node.getKey() == null ? node.getIndex() : node.getKey()) + toString(node.getLeft(),indent +1);
-    }
+        return toString(node.getRight(), indent + 1) + prefix + node.toString() + toString(node.getLeft(), indent + 1);    }
     public String toString(){
         return toString(root,0) + "\n";
     }

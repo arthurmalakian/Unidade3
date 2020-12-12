@@ -64,4 +64,8 @@ public class Node {
     public void setRight(Node right) {
         this.right = right;
     }
+
+    public String toString(){
+        return "["+key != null ? getKey() : "" + index != null ? String.valueOf(getIndex()) : ""+"]";
+    }
 }

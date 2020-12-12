@@ -5,7 +5,23 @@ import java.util.Map;
 import java.util.PriorityQueue;
 
 public class Huffman {
-    
+    /*
+    ATRIBUTOS:
+       * Node root = Raiz da arvore
+       * Map<Character,String> codes = Mapa de códigos para cada caractere que será definido
+    MÉTODOS:
+       * public Huffman(String txt) = Construtor que tem como parametro uma string, nesse construtor são criados
+        os nós da arvore e os códigos dos caracteres.
+       * private void makeCodes(Node node, String current) = cria os códigos dos caracteres a partir dos nós da arvore
+       * private Map<Character,Integer> count(String txt) = verifica a reincidencia de cada caractere no texto e retorna
+        um map com o caractere como chave e o numero de reincidencias do mesmo como atributo
+       * public String getCode(char c) = pega o código do caractere a partir do map dos codes.
+       * public Character getChar(String key) = Retorna um caractere a partir do mapa de codigos
+
+
+
+
+     */
     private Node root;
     private Map<Character,String> codes;
 
@@ -59,9 +75,14 @@ public class Huffman {
         return codes.get(c);
     }
     public Character getChar(String key){
-        Node node = getChar(root,key,0);
-        return node == null ? null : node.getKey();
+        for (Map.Entry<Character,String> xampso : codes.entrySet()){
+            if (xampso.getValue().equals(key)){
+                return xampso.getKey();
+            }
+        }
+        return null;
     }
+    /*
     public Node getChar (Node current,String key,int index){
         if(current.isLeaf()){
             return current;
@@ -75,6 +96,9 @@ public class Huffman {
             }
         }
     }
+
+     */
+
     private String toString(Node node,int indent){
         if (node == null){
             return "";
@@ -83,6 +107,9 @@ public class Huffman {
         for (int i = 0; i < indent; i++){
             prefix += "\t";
         }
-        return "todo";
+        return toString(node.getRight(), indent + 1) + prefix + node.toString() + toString(node.getLeft(), indent + 1);
+    }
+    public String toString(){
+        return toString(root,0);
     }
 }

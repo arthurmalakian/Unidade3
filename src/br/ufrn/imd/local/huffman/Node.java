@@ -63,7 +63,7 @@ public class Node {
     }
 
     public String toString(){
-        return "todo";
+        return "["+ key +", "+freq+"]";
     }
 
 }
